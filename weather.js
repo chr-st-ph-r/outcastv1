@@ -37,7 +37,7 @@ Weather.prototype.check = function() {
         var self = this;
         console.log(self.latitude);
         $.ajax({
-            url: "https://api.wunderground.com/api/3b00a421fe21ab80/conditions/q/" + self.latitude + "," + self.longitude + ".json",
+            url: "https://api.wunderground.com/api/" + config.keys.weatherunderground + "/conditions/q/" + self.latitude + "," + self.longitude + ".json",
             dataType: 'jsonp',
         })
         

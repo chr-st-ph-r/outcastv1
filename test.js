@@ -52,6 +52,11 @@ var test = new Channel({
     name: "test",
 });
 
+var news = new News({
+    name: "news",
+    type: "utility"
+});
+
 
 (function(){
     test.addStream(myFlickr);
@@ -65,6 +70,7 @@ var test = new Channel({
 
     test.load();
     weather.init();
+    news.init();
 //    weather.check();
     
 

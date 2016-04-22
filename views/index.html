@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+<!--
+    <button id="start">load</button>
+    <button id="next">next</button>
+-->
+    
+     <!-- Google Drive API --> 
+    <script src="https://apis.google.com/js/client.js?onload=foo"></script>
+    
+    
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    
+    <!-- Libraries -->
+    <script src="../oauth-1.0a/oauth-1.0a.js"></script>
+    <script type="text/javascript" src="../utils.js"></script>
+    <!-- application scripts -->
+    <script src="../stream.js"></script>
+    <script src="../flickr.js"></script>
+    <script src="../reddit.js"></script>
+    <script src="../channel.js"></script>
+    <script src="../feature.js"></script>
+    <script src="../clock.js"></script>
+    <script src="../weather.js"></script>
+    <script src="../test.js"></script>
+
+    <div id="frame"></div>
+    <div id="feature_bar"></div>
+</html>
+
+<!--
+
+api key: AIzaSyBA46X6-H_HNTZ8jfj-jyk8lN_tIOytpgw
+
+Here is your client ID
+76283283358-laaejfc823ovmcthao3kh6eane3cdq33.apps.googleusercontent.com
+Here is your client secret
+hXxVlLWPuX3l2a1JnKxHzUIF
+ <script>
+    
+    
+        var url = 'https://accounts.google.com/o/oauth2/v2/auth?scope=drive&response_type=token&76283283358-laaejfc823ovmcthao3kh6eane3cdq33.apps.googleusercontent.com&nonce=iauhfiahfitat862';
+        var apiKey = 'AIzaSyBA46X6-H_HNTZ8jfj-jyk8lN_tIOytpgw';
+        var scopes = 'https://www.googleapis.com/auth/drive.readonly';
+        var clientID = '76283283358-laaejfc823ovmcthao3kh6eane3cdq33.apps.googleusercontent.com';
+        
+
+    function handleClientLoad() {
+        gapi.client.setApiKey(apiKey);
+        window.setTimeout(checkAuth, 1);
+    }
+        
+    function checkAuth() {
+        gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: true}, handleAuthResult);
+    }
+        
+    function handleAuthResult(authResult) {
+        var authorizeButton = document.getElementById('authorize-button');
+        if (authResult && !authResult.error) {
+//            authorizeButton.style.visibility = 'hidden';
+            makeApiCall()
+        } else {
+//            authorizeButton.style.visibility = '';
+            handleAuthClick();
+        }
+    }
+        
+    function handleAuthClick(event) {
+        gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: false}, handleAuthResult);
+    }
+        
+    function makeApiCall() {
+        console.log("hello");
+        gapi.client.load('drive', 'v2').then(function() {
+            var request = gapi.client.drive.files.list();
+            request.then(function(resp) {
+                for (var i = 0; i < resp.result.items.length; i++) {
+                    try {
+                        var mimeType = resp.result.items[i].mimeType.split("/")[0];
+                    }
+                    catch(err) {
+                        console.log(err);
+                    }
+                    if (mimeType == "image") {
+                        //document.write(Object.getOwnPropertyNames(resp.result.items[i]));
+                        document.write("<img src='"+resp.result.items[i].webContentLink+"'>")
+                    }
+                }
+                console.log(resp);
+            });
+        });
+    }
+    
+    
+    </script>
+-->

@@ -1,0 +1,87 @@
+@keyframes sceneOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes sceneIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+body {
+    background: black;
+    margin: 0 auto;
+}
+
+.scene {
+    background: center center fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    animation-name: sceneIn;
+    animation-duration: 2s;
+}
+
+
+button#next {
+    margin-left: 5rem;
+}
+
+#frame {
+    background: center center fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+div#clock {
+    position: fixed;
+    font-size: 5rem;
+    font-family: arial;
+    color: white;
+    text-shadow: 2px 2px 20px black;
+    bottom: .5rem;
+    width: 100%;
+    line-height: 1;
+    left: 1rem;
+}
+
+.feature {
+    /* z-index: 100; */
+}
+
+div#frame {
+    z-index: 1;
+}
+
+div#weather {
+    position: fixed;
+    text-align: center;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 2px 2px 20px black;
+    bottom: .5rem;
+    font-family: arial;
+    line-height: 1;
+    width: 100%;
+}
+
+div#city {
+    font-size: 1rem;
+    padding-right: .5rem;
+}
+
+div#feature_bar {
+    z-index: 2;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.29);
+    width: 100%;
+    height: 6rem;
+    bottom: 0rem;
+}

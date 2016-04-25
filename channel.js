@@ -19,10 +19,6 @@ Channel.prototype.addFeature = function(feature) {
     this.features.push(feature);
 }
 
-Channel.prototype.getLoc = function() {
-
-}
-
 Channel.prototype.load = function() {
     console.log("loading");
     for (var i = 0; i < this.streams.length; i++) {
@@ -49,14 +45,14 @@ Channel.prototype.fill = function() {
         //console.log(stream);
 
         while (stream.stream.length > 0) {
-            
+
             var img = stream.release();
             //console.log(img);
             if (!this.loadedURLs[img.src] == 1) {
                 this.pipeline.push(img);
                 this.loadedURLs[img.src] = 1;
             }
-            
+
 //            if (stream.stream.length === 0) {
 //                stream.loaded = false;
 //            }
@@ -79,13 +75,13 @@ Channel.prototype.next = function() {
     if (this.loc === 0) {
         this.shuffle();
     }
-    
+
     this.loc++;
 
     if (this.loc >= this.pipeline.length) {
         this.loc = 0;
-    }   
-    
+    }
+
     console.log("current pos: " + this.loc);
     //console.log(this.pipeline);
 
@@ -107,7 +103,7 @@ Channel.prototype.next = function() {
 //        document.body.appendChild(image);
 //    }
 //    //_q(".scene").classList.add('unscene');
-//    
+//
 //    //document.body.appendChild(this.pipeline[this.loc]);
 //   // console.log(this.pipeline[this.loc]);
 //   console.log(scene);
@@ -128,7 +124,7 @@ Channel.prototype.ready = function() {
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -144,14 +140,14 @@ Channel.prototype.filter = function() {
             this.pipeline.splice(i, 1);
             removals++;
         }
-        
+
         if (this.pipeline[i].width < 1.5 * this.pipeline[i].height) {
             console.log(this.pipeline[i].src);
             console.log(i);
             this.pipeline.splice(i, 1);
             removals++;
         }
-        
+
         if (url.substr(url.length-1) === "/") {
             console.log(this.pipeline[i].src);
             this.pipeline.splice(i, 1);
@@ -160,7 +156,7 @@ Channel.prototype.filter = function() {
     }
     console.log(this.pipeline);
     console.log("removed " + removals);
-    
+
 }
 
 Channel.prototype.isEmpty = function() {
@@ -173,13 +169,13 @@ Channel.prototype.isEmpty = function() {
 
 Channel.prototype.run = function() {
     this.filter();
-    
+
     if (this.ready()) {
         this.next();
         document.body.appendChild(this.get());
-        
+
         var scenes = document.querySelectorAll(".scene");
-        
+
         if (scenes.length > 2) {
             scenes[0].parentElement.removeChild(scenes[0]);
         }

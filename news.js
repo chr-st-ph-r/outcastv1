@@ -2,7 +2,7 @@ function News(obj) {
     Feature.call(this, obj);
     this.articles = [];
     this.loc = 0;
-    this.url = 'https://content.guardianapis.com/search?show-fields=trail-text&page-size=50&api-key=';
+    this.url = 'https://content.guardianapis.com/search?production-office=us&show-fields=trail-text&page-size=50&api-key=';
 }
 
 News.prototype = Object.create(Feature.prototype);
@@ -19,7 +19,6 @@ News.prototype.init = function() {
     console.log(self.articles);
     var bar = U.find("#feature_bar");
     bar.appendChild(self.build());
-    self.start();
   });
 }
 
@@ -28,7 +27,18 @@ News.prototype._buildFeature = function () {
   U.set(ticker, "id", this.name);
 
   this.articles.forEach(function(article) {
-    ticker.innerText += (article.webTitle + " *** ");
+    var head = U.make("span");
+    head.classList.add("headline");
+    head.innerText = article.webTitle + " ";
+
+    var trail = U.make("span");
+    trail.classList.add("trail_text");
+
+    trail.innerText = article.fields.trailText + " // ";
+
+    U.add(ticker, head);
+    U.add(ticker, trail);
+
     // var story = U.make("div");
     //
     // var headline = U.make("div");
@@ -49,11 +59,3 @@ News.prototype._buildFeature = function () {
 
   return ticker;
 };
-
-News.prototype.start = function() {
-  var ticker = U.find("#news");
-  for (var i = 0; i < 1000; i++) {
-    U.set(ticker, "left", (i * -1) + "px");
-  }
-
-}

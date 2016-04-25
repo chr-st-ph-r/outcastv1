@@ -132,16 +132,17 @@ Channel.prototype.filter = function() {
     var removals = 0;
     for (var i = 0; i < this.pipeline.length; i++) {
         //console.log(this.pipeline[i]);
+        //if (!this.pipeline[i]) {continue;}
         var url = this.pipeline[i].src;
         //console.log(url);
         if (this.pipeline[i].width < 1080) {
             console.log(this.pipeline[i].src);
             console.log(i);
-            this.pipeline.splice(i, 1);
+            // this.pipeline.splice(i, 1);
             removals++;
         }
 
-        if (this.pipeline[i].width < 1.5 * this.pipeline[i].height) {
+        if (this.pipeline[i].width < 1.2 * this.pipeline[i].height) {
             console.log(this.pipeline[i].src);
             console.log(i);
             this.pipeline.splice(i, 1);

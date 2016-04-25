@@ -38,6 +38,13 @@ var rNewsPorn = new RedditStream({
     url: "https://www.reddit.com/r/NewsPorn.json?sort=hot"
 })
 
+var rHQG = new RedditStream({
+    key: "",
+    url: "https://www.reddit.com/r/EarthPornGifs.json?sort=hot"
+})
+
+//https://www.reddit.com/r/
+
 var clock = new Clock({
     name: "clock",
     type: "utility",
@@ -64,7 +71,8 @@ var news = new News({
     test.addStream(rEarthPorn);
     test.addStream(rCityPorn);
     test.addStream(rMapPorn);
-    test.addStream(rNewsPorn);
+    // test.addStream(rNewsPorn);
+    test.addStream(rHQG);
     test.addFeature(clock);
 //    test.addStream(popularFlickr);
 
@@ -72,31 +80,31 @@ var news = new News({
     weather.init();
     news.init();
 //    weather.check();
-    
+
 
     var no_clock = true;
-    
+
     var loader = window.setInterval(function() {
         if (test.ready()) {
-            
+
             if (test.isEmpty()) {
                 test.fill();
                 test.shuffle();
             }
-            
+
             var next = test.get();
             if (next) {
                 console.log(typeof next);
                 document.body.appendChild(next);
             }
-            
+
             window.setInterval(test.run.bind(test), 30000);
             window.setInterval(tick_tock, 1000);
-            
+
             window.clearInterval(loader);
         }
     }, 100);
-    
+
 
     var tick_tock = function() {
         if (no_clock) {
@@ -107,5 +115,5 @@ var news = new News({
         }
         clock.update();
     }
-    
+
 })();

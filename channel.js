@@ -20,10 +20,36 @@ Channel.prototype.addFeature = function(feature) {
 }
 
 Channel.prototype.load = function() {
-    console.log("loading");
+    console.log("loading channel");
     for (var i = 0; i < this.streams.length; i++) {
         this.streams[i].fill();
     }
+
+
+
+    var self = this;
+
+    var loadScript = window.setInterval(function() {
+      if (self.ready()) {
+        if (self.isEmpty()) {
+          self.fill();
+          self.shuffle();
+        }
+
+        var next = self.get();
+
+        if (next && next.width) {
+          U.find("#frame").appendChild(next);
+          //document.body.appendChild()
+        }
+
+        window.setInterval(self.run.bind(self), 30000);
+        self.features.forEach(function(feature) {
+          feature.init();
+        });
+        window.clearInterval(loadScript);
+      }
+    })
 }
 
 Channel.prototype.initFeatures = function() {

@@ -16,11 +16,13 @@ Feature.prototype.build = function() {
     console.log(this + " " + this.loc);
 
     feature_box.appendChild(feature);
-    
+
     return feature_box;
 }
 
 Feature.prototype.update = function(feat) {
+  console.log(this.name);
     var self = document.querySelector("#" + this.name);
+
     this._update(self);
 }

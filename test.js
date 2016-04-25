@@ -74,46 +74,41 @@ var news = new News({
     // test.addStream(rNewsPorn);
     test.addStream(rHQG);
     test.addFeature(clock);
-//    test.addStream(popularFlickr);
+    test.addFeature(weather);
+    test.addFeature(news);
 
     test.load();
-    weather.init();
-    news.init();
-//    weather.check();
+
+    // var loader = window.setInterval(function() {
+    //     if (test.ready()) {
+    //
+    //         if (test.isEmpty()) {
+    //             test.fill();
+    //             test.shuffle();
+    //         }
+    //
+    //         var next = test.get();
+    //         if (next) {
+    //             console.log(typeof next);
+    //             document.body.appendChild(next);
+    //         }
+    //
+    //         window.setInterval(test.run.bind(test), 30000);
+    //         window.setInterval(tick_tock, 1000);
+    //
+    //         window.clearInterval(loader);
+    //     }
+    // }, 100);
 
 
-    var no_clock = true;
-
-    var loader = window.setInterval(function() {
-        if (test.ready()) {
-
-            if (test.isEmpty()) {
-                test.fill();
-                test.shuffle();
-            }
-
-            var next = test.get();
-            if (next) {
-                console.log(typeof next);
-                document.body.appendChild(next);
-            }
-
-            window.setInterval(test.run.bind(test), 30000);
-            window.setInterval(tick_tock, 1000);
-
-            window.clearInterval(loader);
-        }
-    }, 100);
-
-
-    var tick_tock = function() {
-        if (no_clock) {
-            var new_clock = clock.build();
-            console.log(new_clock);
-            document.querySelector("#feature_bar").appendChild(new_clock);
-            no_clock = false;
-        }
-        clock.update();
-    }
+    // var tick_tock = function() {
+    //     if (no_clock) {
+    //         var new_clock = clock.build();
+    //         console.log(new_clock);
+    //         document.querySelector("#feature_bar").appendChild(new_clock);
+    //         no_clock = false;
+    //     }
+    //     clock.update();
+    // }
 
 })();

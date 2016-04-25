@@ -5,10 +5,23 @@ function Clock(obj) {
     this.hours = 0;
     this.day = 0;
     this.month = 0;
-    this.year = 0
+    this.year = 0;
+    this.loaded = false;
 }
 
 Clock.prototype = Object.create(Feature.prototype);
+
+Clock.prototype.init = function () {
+  if (!this.loaded) {
+    var clock = this.build();
+    U.find("#feature_bar").appendChild(clock);
+    this.loaded = true;
+  }
+
+  var self = this;
+
+  window.setInterval(self.update.bind(self), 1000);
+};
 
 Clock.prototype.tick = function() {
     var data = new Date();
@@ -32,14 +45,14 @@ Clock.prototype._update = function(clock) {
     this.tick();
     var hours = this.hours;
     var minutes = this.minutes;
-    
+
     if (minutes < 10) {
         minutes = "0" + minutes;
     }
-    
+
     if (hours > 12) {
         hours = hours - 12;
     }
-    
+
     clock.innerText = hours + ":" + minutes;
 }

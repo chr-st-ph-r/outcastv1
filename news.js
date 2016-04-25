@@ -17,7 +17,9 @@ News.prototype.init = function() {
   .then(function(data) {
     self.articles = data.response.results;
     console.log(self.articles);
-    document.body.appendChild(self.build());
+    var bar = U.find("#feature_bar");
+    bar.appendChild(self.build());
+    self.start();
   });
 }
 
@@ -26,7 +28,7 @@ News.prototype._buildFeature = function () {
   U.set(ticker, "id", this.name);
 
   this.articles.forEach(function(article) {
-    ticker.innerText += article.webTitle;
+    ticker.innerText += (article.webTitle + " *** ");
     // var story = U.make("div");
     //
     // var headline = U.make("div");
@@ -48,10 +50,10 @@ News.prototype._buildFeature = function () {
   return ticker;
 };
 
-News.prototype.next = function () {
-  this.loc++;
-
-  if (this.loc >= this.pipeline.length) {
-      this.loc = 0;
+News.prototype.start = function() {
+  var ticker = U.find("#news");
+  for (var i = 0; i < 1000; i++) {
+    U.set(ticker, "left", (i * -1) + "px");
   }
-};
+
+}
